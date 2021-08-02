@@ -1,50 +1,35 @@
-import { React, ReactDOM, Component } from 'react';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-class NameForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
+import LoginForm from './Form.Components/LoginForm';
+import RegisterForm from './Form.Components/RegisterForm';
+import ListadoForm from './Form.Components/ListadoForm';
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
-
-function App() {
-	
+const App = () => {
 	return (
-			<NameForm />
+		<BrowserRouter>
+			<Switch>
+				<Route
+					exact
+					path="/"
+					component={LoginForm} />
+				<Route
+					exact
+					path="/login"
+					component={LoginForm} />
+				<Route
+					exact
+					path="/register"
+					component={RegisterForm} />
+				<Route
+					exact
+					path="/taskList"
+				>
+					<ListadoForm token='hola'/>
+				</Route>
+			</Switch>
+		</BrowserRouter>
 	);
-	
-	/*return (
-		<Container maxWidth="sm">
-			<FormControl>
-				<InputLabel htmlFor="txt-correo">Correo</InputLabel>
-				<Input id="txt-correo" name="txt-correo" type="email" aria-describedby="my-helper-text" />
-			</FormControl>
-		</Container>
-	);*/
 }
-
+ 
 export default App;
